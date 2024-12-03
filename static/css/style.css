@@ -1,0 +1,94 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  height: 100%;
+}
+
+.el-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* 確保內容從左邊開始顯示 */
+}
+
+.navbar, .sidebar {
+  display: flex;
+}
+
+.navbar {
+    height: 60px; /* 固定高度，防止上下滑動 */
+background-color: #20a0ff;
+color: white;
+padding: 0 10px; /* 縮小內間距，確保內容更貼合 */
+display: flex;
+align-items: center;
+justify-content: flex-start; /* 從左側開始排列內容 */
+overflow-x: auto; /* 啟用水平滾動 */
+overflow-y: hidden; /* 禁止上下滾動 */
+white-space: nowrap; /* 防止項目換行 */
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  overflow-y: auto; /* 確保當內容超過時可以滾動 */
+  height: 100vh; /* 讓 sidebar 占滿整個視窗高度 */
+  padding-top: 10px; /* 增加 padding 使得項目不會緊貼邊緣 */
+  transition: transform 0.3s ease;
+}
+
+.navbar .el-menu-item {
+flex-shrink: 0; /* 防止子項目壓縮 */
+}
+
+/* 自定義水平滾動條的樣式（可選） */
+.navbar::-webkit-scrollbar {
+height: 6px; /* 水平滾動條的高度 */
+}
+
+.navbar::-webkit-scrollbar-thumb {
+background: rgba(255, 255, 255, 0.5); /* 滾動條顏色 */
+border-radius: 3px;
+}
+
+.navbar::-webkit-scrollbar-track {
+background: rgba(0, 0, 0, 0.1); /* 滾動條背景 */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow: auto; /* 防止內容過多時產生滾動 */
+}
+
+.el-menu-vertical-demo {
+  padding-top: 10px; /* 為了讓 sidebar 中的項目不會緊貼頂部 */
+}
+
+.el-menu-item {
+  padding: 10px 20px;
+}
+
+/* 當螢幕小於一定寬度時，隱藏 sidebar，並顯示 navbar */
+@media (max-width: 1349px) {
+  .sidebar {
+    display: none; /* 隱藏 sidebar */
+  }
+
+  .navbar {
+    display: block; /* 顯示 navbar */
+  }
+
+  .main-content {
+    padding-top: 60px; /* 防止主內容被 navbar 擋住 */
+  }
+}
+
+@media screen and (min-width: 1920px) {
+.navbar {
+    display: none;
+}
+}
