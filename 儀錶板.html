@@ -27,7 +27,9 @@
         return {
           isSmallScreen: false,
           activeMenu: 'Item 1',
-          menuItems: Array.from({ length: 50 }, (_, i) => ({ name: `Item ${i + 1}` }))
+          menuItems: Array.from({ length: 50 }, (_, i) => ({ name: `Item ${i + 1}` })),
+          progress1: 80, // 第一個進度條的初始值
+          progress2: 75  // 第二個進度條的初始值
         };
       },
       mounted() {
@@ -40,7 +42,33 @@
       methods: {
         checkScreenSize() {
           this.isSmallScreen = window.innerWidth < (window.screen.width / 2);
-        }
+        },
+        // 設置進度條顏色部分樣式
+        getProgressBarStyle(percentage, color) {
+          return {
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              height: '100%',
+              width: `${percentage}%`,  // 設置進度條的顏色部分寬度
+              backgroundColor: color,
+              borderRadius: '20px',
+            };
+          },
+          // 設置文字的位置樣式
+          getTextStyle(percentage) {
+            return {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',  // 文字容器從進度條顏色範圍的中心開始
+              // transform: `translate(-${percentage / 2}%, -50%)`,  // 根據進度百分比進行微調
+              transform: 'translate(-50%, -50%)', // 固定文字完全置中
+              fontSize: '16px',
+              color: 'white',
+              fontWeight: 'bold',
+              zIndex: '1',  // 確保文字層級在最上面
+            };
+          }
       },
       template: `
         <el-container class="el-container">
@@ -83,6 +111,26 @@
             <el-main class="main-content">
               <h2>{{ activeMenu }} Page</h2>
               <p>This is the content for the {{ activeMenu }} section.</p>
+
+              <!-- 第一個進度條 -->
+              <div style="position: relative; margin-bottom: 20px; height: 40px; background-color: #f5f5f5; border-radius: 20px; overflow: hidden;">
+                <!-- 進度條顏色部分 -->
+                <div :style="getProgressBarStyle(progress1, '#409EFF')">
+                  <!-- 進度條內文字 -->
+                  <div class="progress-text" :style="getTextStyle(progress1)">{{ progress1 }}%</div>
+                </div>
+              </div>
+
+              <!-- 第二個進度條 -->
+              <div style="position: relative; height: 40px; background-color: #f5f5f5; border-radius: 20px; overflow: hidden;">
+                <!-- 進度條顏色部分 -->
+                <div :style="getProgressBarStyle(progress2, '#E6A23C')">
+                  <!-- 進度條內文字 -->
+                  <div class="progress-text" :style="getTextStyle(progress2)">{{ progress2 }}%</div>
+                </div>
+              </div>
+
+
             </el-main>
           </el-container>
         </el-container>

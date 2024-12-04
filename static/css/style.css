@@ -87,8 +87,39 @@ background: rgba(0, 0, 0, 0.1); /* 滾動條背景 */
   }
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1910px) {
 .navbar {
     display: none;
 }
+}
+/* 進度條中文字樣式調整 */
+.el-progress__text {
+  position: absolute; /* 確保文字置中 */
+  top: 50%; /* 垂直居中 */
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%, -50%); /* 將原點移到中間 */
+  color: white !important; /* 文字顏色與背景對比 */
+  font-size: 16px; /* 調整文字大小 */
+  font-weight: bold; /* 加粗文字 */
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 確保文字在顏色範圍的中間 */
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  z-index: 1; /* 确保文字层级在最上面 */
+}
+
+/* 進度條顏色部分 */
+.el-main div > div:first-child {
+  height: 100%;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
